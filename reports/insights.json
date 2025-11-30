@@ -1,0 +1,110 @@
+{
+  "query_summary": "Analyze the drop in ROAS across Facebook Ads campaigns.",
+  "data_context": {
+    "key_observation": "Overall ROAS is 10.41, but there's likely significant variance across campaigns and ad sets, given the min ROAS is 0.08 and max is 113.46. Data covers a very short period (2 days).",
+    "baseline_metrics": {
+      "avg_roas": 10.41,
+      "total_spend": 46405.43,
+      "total_impressions": 26084825,
+      "total_clicks": 352067,
+      "total_purchases": 7697
+    },
+    "variance_observed": "Large range in ROAS values (0.08 to 113.46) suggests inconsistent performance across different campaigns or ad sets.  The short time period makes assessing trends difficult."
+  },
+  "hypotheses": [
+    {
+      "id": "h1",
+      "title": "Audience Saturation in Retargeting Ad Sets",
+      "description": "Retargeting ad sets (Adset-1 Retarget, Adset-2 Retarget, Adset-4 Retarget, Adset-5 Retarget) might be experiencing audience fatigue, leading to lower ROAS. Users repeatedly seeing the same ads become less likely to convert.",
+      "driver": "Audience Fatigue",
+      "testable_prediction": "Retargeting ad sets will have a lower ROAS and CTR compared to broad or lookalike audiences.",
+      "supporting_evidence": [
+        "The presence of multiple Retargeting ad sets in the data.",
+        "Audience fatigue is a common issue in retargeting campaigns."
+      ],
+      "counterevidence": [
+        "Retargeting ad sets might have a higher conversion rate despite lower CTR if the audience is highly qualified."
+      ],
+      "confidence": 0.7,
+      "confidence_reasoning": "Retargeting campaigns are susceptible to fatigue. However, without historical data, it's hard to confirm if this is the primary driver. The short date range also limits the ability to assess fatigue over time."
+    },
+    {
+      "id": "h2",
+      "title": "Creative Decay in Specific Ad Sets/Campaigns",
+      "description": "Certain ad sets or campaigns are using creatives that have become stale, leading to a decline in CTR and ROAS.  This is particularly likely for video or UGC content that relies on novelty.",
+      "driver": "Creative Decay",
+      "testable_prediction": "Ad sets with older creatives will have lower CTR and ROAS compared to those with newer creatives.",
+      "supporting_evidence": [
+        "The data includes various creative types (Image, Video, UGC, Carousel), which have different decay rates.",
+        "Creative decay is a well-known phenomenon in advertising."
+      ],
+      "counterevidence": [
+        "Some evergreen creatives may maintain consistent performance over time.",
+        "Lack of data about specific creative age."
+      ],
+      "confidence": 0.6,
+      "confidence_reasoning": "Creative decay is a plausible explanation, but requires knowing the age of the creatives and comparing performance over time. The short date range makes this difficult to assess."
+    },
+    {
+      "id": "h3",
+      "title": "CPM Variance Across Audience Segments",
+      "description": "Differences in CPM across audience segments (Broad, Lookalike, Retargeting) are impacting ROAS. Higher CPMs in certain segments might not be justified by corresponding conversion rates.",
+      "driver": "Audience Targeting",
+      "testable_prediction": "Ad sets targeting specific audience segments will have significantly different CPMs, and ROAS will be inversely correlated with CPM within those segments.",
+      "supporting_evidence": [
+        "The data includes various audience types (Broad, Retargeting, Lookalike).",
+        "CPMs often vary significantly between audience segments."
+      ],
+      "counterevidence": [
+        "High CPMs might be justified if the audience segment has a very high conversion rate and order value."
+      ],
+      "confidence": 0.5,
+      "confidence_reasoning": "CPM variance is likely, but its direct impact on ROAS needs to be quantified by comparing CPM and conversion rates across segments.  More data is needed to establish correlation."
+    },
+    {
+      "id": "h4",
+      "title": "Inefficient Spend Allocation Across Campaigns",
+      "description": "The budget may not be allocated efficiently across different campaigns. Some campaigns might be performing well and deserve more budget, while others are underperforming and should have their budget reduced.",
+      "driver": "Budget Effects",
+      "testable_prediction": "Campaigns with higher ROAS will have a lower spend per purchase compared to campaigns with lower ROAS.",
+      "supporting_evidence": [
+        "The wide range of ROAS values suggests that some campaigns are more efficient than others.",
+        "Efficient budget allocation is crucial for maximizing overall ROAS."
+      ],
+      "counterevidence": [
+        "Higher spend on some campaigns may be necessary for brand awareness, even if ROAS is lower."
+      ],
+      "confidence": 0.4,
+      "confidence_reasoning": "This is a general principle, but needs specific campaign-level data to validate. Requires comparing spend and ROAS at the campaign level."
+    }
+  ],
+  "priority_ranking": [
+    {
+      "hypothesis_id": "h1",
+      "priority_score": 0.8,
+      "reason": "Audience fatigue in retargeting is a common and easily testable issue. Segmenting the data by audience type and comparing ROAS will quickly reveal if this is a primary driver."
+    },
+    {
+      "hypothesis_id": "h2",
+      "priority_score": 0.7,
+      "reason": "Creative decay is also a likely factor, especially if specific creatives have been running for an extended period. Comparing the performance of newer vs. older creatives is a logical next step."
+    },
+    {
+      "hypothesis_id": "h3",
+      "priority_score": 0.6,
+      "reason": "CPM variance is important, but its impact depends on conversion rates. It requires more in-depth analysis to determine if high CPMs are justified."
+    },
+    {
+      "hypothesis_id": "h4",
+      "priority_score": 0.5,
+      "reason": "Inefficient spend allocation is a general concern but needs more granular data and campaign-level analysis to validate."
+    }
+  ],
+  "recommended_validations": [
+    "Segment ROAS by audience type (Broad, Retargeting, Lookalike) and perform a t-test to compare means.",
+    "Compare CTR and ROAS of ad sets with older creatives to those with newer creatives.",
+    "Calculate CPM for each audience segment and correlate with ROAS.",
+    "Analyze spend per purchase for each campaign and identify inefficiently allocated budgets."
+  ],
+  "thinking_process": "I started by identifying the key observation: the wide range of ROAS values. This suggests that performance varies significantly across campaigns or ad sets. I then considered common marketing drivers that could explain this variance, such as audience fatigue, creative decay, CPM variance, and inefficient spend allocation. For each driver, I formulated a specific and testable hypothesis, provided supporting evidence from the data and marketing principles, and acknowledged potential counterevidence. Finally, I prioritized the hypotheses based on their likelihood and ease of validation, and recommended specific validation strategies."
+}

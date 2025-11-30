@@ -1,0 +1,46 @@
+# Dataset Guide
+
+## Synthetic Facebook Ads Dataset
+
+### File: `synthetic_fb_ads_undergarments.csv`
+
+**Description**: Synthetic eCommerce + Facebook Ads performance dataset for undergarment/apparel campaigns.
+
+**Columns**:
+- `campaign_name`: Campaign name (e.g., "Men ComfortMax Launch")
+- `adset_name`: Ad set identifier (e.g., "Adset-1 Retarget")
+- `date`: Performance date (YYYY-MM-DD format)
+- `spend`: Daily ad spend (USD)
+- `impressions`: Number of impressions served
+- `clicks`: Number of clicks
+- `ctr`: Click-through rate (clicks/impressions)
+- `purchases`: Number of conversions/purchases
+- `revenue`: Revenue generated (USD)
+- `roas`: Return on Ad Spend (revenue/spend)
+- `creative_type`: Type of creative (Image, Video, UGC, Carousel)
+- `creative_message`: Ad copy/messaging
+- `audience_type`: Target audience (Broad, Lookalike, Interest-based)
+- `platform`: Ad platform (Facebook, Instagram)
+- `country`: Geographic country (US, CA, UK, AU)
+
+### Key Insights for Analysis
+
+- **Campaign Period**: Jan 1 - Feb 28, 2025 (synthetic data)
+- **Campaigns**: Multiple campaigns ("Men ComfortMax Launch", "Women Comfort Series", etc.)
+- **Ad Sets**: Retargeting, Cold Audience, Lookalike variations
+- **Creative Variations**: Text, Image, Video, UGC formats
+- **Geographic**: Multi-country performance data
+
+### Data Quality
+
+- Clean, normalized format
+- No missing values in performance metrics
+- ROAS calculated as revenue/spend
+- CTR normalized (0.0-1.0 scale)
+- Date-based time series suitable for trend analysis
+
+### Usage Notes
+
+- Dataset is synthetic and designed for agentic analysis exercises
+- Includes realistic ROAS fluctuations, CTR variations, and creative performance variations
+- Suitable for hypothesis generation around audience fatigue, creative underperformance, and seasonal trends

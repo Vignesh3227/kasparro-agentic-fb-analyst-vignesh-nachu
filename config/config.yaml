@@ -1,0 +1,75 @@
+# Agentic Facebook Analyst Configuration
+
+# Model and API Configuration
+model:
+  name: "gemini-2.0-flash"
+  api_key_env: "GOOGLE_API_KEY"
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 2048
+
+# Data Configuration
+data:
+  dataset_path: "data/synthetic_fb_ads_undergarments.csv"
+  sample_mode: true
+  sample_size: 100
+
+# Agent Configuration
+agents:
+  planner:
+    temperature: 0.3
+    max_tokens: 1024
+    reasoning_steps: 5
+  
+  data_agent:
+    temperature: 0.2
+    max_tokens: 1500
+    summary_depth: "high"
+  
+  insight_agent:
+    temperature: 0.7
+    max_tokens: 2048
+    min_confidence: 0.6
+    hypothesis_count: 5
+  
+  evaluator:
+    temperature: 0.2
+    max_tokens: 1024
+    confidence_threshold: 0.6
+    statistical_test: "correlation"
+  
+  creative_generator:
+    temperature: 0.8
+    max_tokens: 1500
+    creative_count: 5
+    low_ctr_threshold: 0.01
+
+# Thresholds and Metrics
+thresholds:
+  roas_drop_threshold: 0.2  # 20% drop considered significant
+  ctr_low_threshold: 0.012  # CTR below 1.2%
+  confidence_high: 0.8
+  confidence_medium: 0.6
+  confidence_low: 0.4
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "json"
+  output_dir: "logs"
+  enable_langfuse: true
+  langfuse_project: "kasparro-fb-analyst"
+
+# Output Configuration
+output:
+  insights_path: "reports/insights.json"
+  creatives_path: "reports/creatives.json"
+  report_path: "reports/report.md"
+  logs_path: "logs"
+
+# System Configuration
+system:
+  seed: 42
+  verbose: true
+  max_retries: 3
+  retry_delay: 1
