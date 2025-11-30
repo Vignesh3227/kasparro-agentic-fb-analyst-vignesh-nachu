@@ -27,15 +27,15 @@ class AgentOrchestrator:
         self.config = get_config(config_path)
         self.logger = get_logger("orchestrator", self.config.get("logging.output_dir", "logs"))
         
-        # Initialize LLM client
+        
         api_key = os.getenv("GOOGLE_API_KEY") or self.config.get("model.api_key_env")
         model_name = self.config.get("model.name", "gemini-2.0-flash")
         self.llm_client = LLMClient(api_key=api_key, model_name=model_name)
         
-        # Initialize agents
+        
         self._init_agents()
         
-        # Execution context
+        
         self.execution_trace = []
         self.results = {}
 
@@ -67,44 +67,44 @@ class AgentOrchestrator:
         self.logger.log_metrics({"execution_start": execution_id, "query": user_query})
 
         try:
-            # Step 1: Planning
-            print("\n📋 Step 1: Planning Analysis...")
+            
+            print("\n Step 1: Planning Analysis...")
             plan_context = self._prepare_plan_context()
             plan_result = self.planner_agent.execute(user_query, plan_context)
             self._record_execution("planner", plan_result)
             print(f"   ✓ Plan created with {len(plan_result.get('plan', {}).get('subtasks', []))} subtasks")
 
-            # Step 2: Data Loading and Analysis
-            print("\n📊 Step 2: Loading and Analyzing Data...")
+            
+            print("\n Step 2: Loading and Analyzing Data...")
             data_context = self._prepare_data_context()
             data_result = self.data_agent.execute(user_query, data_context)
             self._record_execution("data_agent", data_result)
             print(f"   ✓ Data loaded: {data_result.get('record_count', 0)} records")
 
-            # Step 3: Insight Generation
-            print("\n💡 Step 3: Generating Hypotheses...")
+            
+            print("\n Step 3: Generating Hypotheses...")
             insight_context = self._prepare_insight_context(plan_result, data_result)
             insight_result = self.insight_agent.execute(user_query, insight_context)
             self._record_execution("insight_agent", insight_result)
             hypothesis_count = len(insight_result.get('hypotheses', {}).get('hypotheses', []))
             print(f"   ✓ Generated {hypothesis_count} hypotheses")
 
-            # Step 4: Evaluation
-            print("\n✅ Step 4: Validating Hypotheses...")
+           
+            print("\n Step 4: Validating Hypotheses...")
             eval_context = self._prepare_eval_context(insight_result, data_result)
             eval_result = self.evaluator_agent.execute(user_query, eval_context)
             self._record_execution("evaluator", eval_result)
             print(f"   ✓ Validation complete")
 
-            # Step 5: Creative Generation
-            print("\n🎨 Step 5: Generating Creative Recommendations...")
+            
+            print("\n Step 5: Generating Creative Recommendations...")
             creative_context = self._prepare_creative_context(data_result)
             creative_result = self.creative_agent.execute(user_query, creative_context)
             self._record_execution("creative_generator", creative_result)
             print(f"   ✓ Generated {creative_result.get('count', 0)} creative recommendations")
 
-            # Compile final report
-            print("\n📄 Step 6: Compiling Report...")
+            
+            print("\n Step 6: Compiling Report...")
             final_report = self._compile_report(
                 user_query,
                 plan_result,
@@ -115,11 +115,11 @@ class AgentOrchestrator:
                 execution_id
             )
 
-            print("\n✨ Analysis Complete!\n")
+            print("\n Analysis Complete!\n")
             return final_report
 
         except Exception as e:
-            print(f"\n❌ Error during execution: {str(e)}")
+            print(f"\n Error during execution: {str(e)}")
             self.logger.log_error("orchestrator", execution_id, str(e))
             return {
                 "status": "error",
@@ -207,7 +207,6 @@ class AgentOrchestrator:
             "execution_trace": self.execution_trace,
         }
 
-        # Save report outputs
         self._save_outputs(report)
 
         return report
@@ -216,23 +215,23 @@ class AgentOrchestrator:
         """Save analysis outputs to files."""
         output_config = self.config.get_dict("output")
         
-        # Ensure output directories exist
+
         Path(output_config.get("logs_path", "logs")).mkdir(parents=True, exist_ok=True)
         Path(output_config.get("insights_path", "reports/insights.json")).parent.mkdir(parents=True, exist_ok=True)
 
-        # Save insights
+        
         insights_path = output_config.get("insights_path", "reports/insights.json")
         with open(insights_path, 'w') as f:
             json.dump(report.get("insights", {}), f, indent=2, default=str)
         print(f"   ✓ Saved insights to {insights_path}")
 
-        # Save creatives
+        
         creatives_path = output_config.get("creatives_path", "reports/creatives.json")
         with open(creatives_path, 'w') as f:
             json.dump(report.get("creative_recommendations", []), f, indent=2, default=str)
         print(f"   ✓ Saved creatives to {creatives_path}")
 
-        # Generate markdown report
+       
         report_path = output_config.get("report_path", "reports/report.md")
         self._generate_markdown_report(report, report_path)
         print(f"   ✓ Saved report to {report_path}")
@@ -260,7 +259,7 @@ class AgentOrchestrator:
 
 """
         
-        # Add validated hypotheses
+        
         evaluation = report.get('evaluation', {})
         for eval_item in evaluation.get('hypothesis_evaluations', [])[:3]:
             markdown += f"""
@@ -271,12 +270,12 @@ class AgentOrchestrator:
 
 """
 
-        # Add recommended actions
+        
         markdown += "\n## Recommended Actions\n\n"
         for action in evaluation.get('recommended_actions', []):
             markdown += f"- {action}\n"
 
-        # Add creative recommendations summary
+        
         markdown += f"\n## Creative Recommendations\n\n"
         markdown += f"Generated {len(report.get('creative_recommendations', []))} new creative variations for low-CTR campaigns.\n\n"
         for i, rec in enumerate(report.get('creative_recommendations', [])[:2], 1):

@@ -21,25 +21,25 @@ class StructuredLogger:
         self.log_dir = log_dir
         self.enable_langfuse = enable_langfuse
         
-        # Create logs directory if it doesn't exist
+       
         Path(log_dir).mkdir(parents=True, exist_ok=True)
         
-        # Setup file logger
+        
         self.log_file = os.path.join(log_dir, f"{name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl")
         self.logger = logging.getLogger(name)
         self.logger.setLevel(logging.INFO)
         
-        # File handler for structured logs
+       
         file_handler = logging.FileHandler(self.log_file)
         file_handler.setFormatter(logging.Formatter('%(message)s'))
         self.logger.addHandler(file_handler)
         
-        # Console handler for visibility
+       
         console_handler = logging.StreamHandler(sys.stdout)
         console_handler.setFormatter(logging.Formatter('[%(levelname)s] %(message)s'))
         self.logger.addHandler(console_handler)
         
-        # Langfuse integration (optional)
+        
         self.langfuse_client = None
         if enable_langfuse:
             try:
@@ -81,7 +81,7 @@ class StructuredLogger:
             "agent": agent_name,
             "trace_id": trace_id,
             "action": action,
-            "input": str(input_data)[:500],  # Truncate large inputs
+            "input": str(input_data)[:500], 
             "output": str(output)[:500],
         }
         self.logger.info(json.dumps(log_entry))
@@ -123,7 +123,7 @@ class StructuredLogger:
         return self.log_file
 
 
-# Global logger instance
+
 _logger_instance: Optional[StructuredLogger] = None
 
 

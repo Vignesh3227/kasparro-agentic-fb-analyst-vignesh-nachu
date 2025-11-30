@@ -21,11 +21,9 @@ class InsightAgent(BaseAgent):
         Returns:
             Structured hypotheses with confidence scores
         """
-        # Load prompt template
         with open('prompts/insight_agent.md', 'r') as f:
             system_prompt = f.read()
 
-        # Build hypothesis generation prompt
         hypothesis_prompt = f"""{system_prompt}
 
 ## Analysis Question
@@ -49,7 +47,6 @@ Return valid JSON matching the specified schema. Focus on actionable, testable h
 """
 
         try:
-            # Generate hypotheses using LLM
             hypotheses_response = self.think_json(hypothesis_prompt, temperature=0.7)
             self.log_execution(task, hypotheses_response)
             return {
@@ -58,7 +55,6 @@ Return valid JSON matching the specified schema. Focus on actionable, testable h
                 "task": task,
             }
         except Exception as e:
-            # Fallback to template hypotheses if LLM fails
             return {
                 "status": "partial",
                 "hypotheses": self._create_fallback_hypotheses(task, context),

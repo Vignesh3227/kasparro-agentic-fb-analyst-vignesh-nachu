@@ -27,16 +27,13 @@ class EvaluatorAgent(BaseAgent):
         Returns:
             Validation results with confidence scores
         """
-        # Load prompt template
         with open('prompts/evaluator.md', 'r') as f:
             system_prompt = f.read()
 
-        # Prepare evidence for validation
         hypotheses = context.get('hypotheses', {}).get('hypotheses', [])
         data_summary = context.get('data_summary', {})
         analysis_data = context.get('analysis', {})
 
-        # Generate validation prompt
         validation_prompt = f"""{system_prompt}
 
 ## Hypotheses to Validate
@@ -63,7 +60,7 @@ Return valid JSON matching the specified schema. Be rigorous: require >5% deltas
 """
 
         try:
-            # Generate evaluations using LLM
+
             evaluation_response = self.think_json(validation_prompt, temperature=0.2)
             self.log_execution(task, evaluation_response)
             return {
@@ -72,7 +69,6 @@ Return valid JSON matching the specified schema. Be rigorous: require >5% deltas
                 "task": task,
             }
         except Exception as e:
-            # Fallback to template evaluations
             return {
                 "status": "partial",
                 "evaluation": self._create_fallback_evaluation(hypotheses),
@@ -83,7 +79,7 @@ Return valid JSON matching the specified schema. Be rigorous: require >5% deltas
         """Create fallback evaluation when LLM fails."""
         evaluations = []
         
-        for h in hypotheses[:3]:  # Evaluate first 3 hypotheses
+        for h in hypotheses[:3]:  
             evaluations.append({
                 "hypothesis_id": h.get('id', 'h_unknown'),
                 "hypothesis_title": h.get('title', 'Unknown'),
@@ -131,9 +127,7 @@ Return valid JSON matching the specified schema. Be rigorous: require >5% deltas
         """Calculate statistical evidence for a hypothesis."""
         evidence = {}
         
-        # Example: Audience fatigue hypothesis
         if 'fatigue' in hypothesis.get('title', '').lower():
-            # Split into early and late periods
             if 'date' in df.columns:
                 mid_date = df['date'].median()
                 early = df[df['date'] <= mid_date]

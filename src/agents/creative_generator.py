@@ -27,11 +27,9 @@ class CreativeGeneratorAgent(BaseAgent):
         Returns:
             Creative recommendations for each low-performer
         """
-        # Load prompt template
         with open('prompts/creative_generator.md', 'r') as f:
             system_prompt = f.read()
 
-        # Extract low-CTR campaigns and analysis data
         low_ctr_campaigns = context.get('analysis', {}).get('low_ctr_campaigns', [])
         creative_performance = context.get('analysis', {}).get('creative_performance', {})
         data_summary = context.get('data_summary', {})
@@ -43,7 +41,6 @@ class CreativeGeneratorAgent(BaseAgent):
                 "recommendations": []
             }
 
-        # Generate creatives for each low-performer
         recommendations = []
 
         for campaign in low_ctr_campaigns[:3]:  # Focus on top 3 low performers

@@ -49,7 +49,7 @@ class Config:
         return f"Config({self.config_path})"
 
 
-# Global config instance
+
 _config_instance: Optional[Config] = None
 
 

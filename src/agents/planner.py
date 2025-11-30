@@ -21,11 +21,11 @@ class PlannerAgent(BaseAgent):
         Returns:
             Structured analysis plan
         """
-        # Load prompt template
+        
         with open('prompts/planner.md', 'r') as f:
             system_prompt = f.read()
         
-        # Build analysis prompt
+        
         analysis_prompt = f"""{system_prompt}
 
 ## User Query
@@ -48,7 +48,7 @@ Decompose the user's query into a structured analysis plan. Return a valid JSON 
 Ensure the JSON is valid and complete.
 """
         
-        # Generate plan using LLM
+        
         try:
             plan_response = self.think_json(analysis_prompt, temperature=0.3)
             self.log_execution(task, plan_response)
@@ -58,7 +58,7 @@ Ensure the JSON is valid and complete.
                 "task": task,
             }
         except Exception as e:
-            # Fallback to structured plan if JSON generation fails
+           
             return {
                 "status": "partial",
                 "plan": self._create_fallback_plan(task, context),

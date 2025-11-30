@@ -1,7 +1,7 @@
 # Facebook Ads Performance Analysis Report
 
-**Execution ID**: 20251130_120947  
-**Generated**: 2025-11-30T12:10:19.381478
+**Execution ID**: 20251130_122854  
+**Generated**: 2025-11-30T12:29:24.752791
 
 ## Analysis Query
 
@@ -18,21 +18,21 @@ Analyze ROAS drop
 ### Validated Hypotheses
 
 
-**Audience Saturation in Retargeting Ad Sets**
+**Audience Fatigue in Retargeting Adsets**
+- Status: PARTIALLY_CONFIRMED
+- Confidence: 80.00%
+- Action: Sufficient confidence to recommend testing remediation tactics
+
+
+**Creative Decay in Video Ads**
 - Status: PARTIALLY_CONFIRMED
 - Confidence: 70.00%
 - Action: Sufficient confidence to recommend testing remediation tactics
 
 
-**Creative Decay in Specific Ad Sets/Campaigns**
+**Increased Competition in the US Market**
 - Status: PARTIALLY_CONFIRMED
 - Confidence: 60.00%
-- Action: Sufficient confidence to recommend testing remediation tactics
-
-
-**CPM Variance Across Audience Segments**
-- Status: PARTIALLY_CONFIRMED
-- Confidence: 50.00%
 - Action: Sufficient confidence to recommend testing remediation tactics
 
 

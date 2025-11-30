@@ -29,25 +29,25 @@ class DataAgent(BaseAgent):
         Returns:
             Data summary and insights
         """
-        # Load configuration
+        
         dataset_path = context.get('dataset_path', 'data/synthetic_fb_ads_undergarments.csv')
         sample_mode = context.get('sample_mode', False)
         sample_size = context.get('sample_size', 100)
         analysis_requirements = context.get('analysis_requirements', [])
 
         try:
-            # Load dataset
+            
             self.data_loader = DataLoader(dataset_path, sample_mode, sample_size)
             self.df = self.data_loader.load()
 
-            # Generate basic summary
+           
             summary = self.data_loader.get_summary()
             summary_dict = summary.to_dict()
 
-            # Perform additional analysis based on requirements
+            
             analysis_results = self._perform_analysis(analysis_requirements)
 
-            # Use LLM to structure findings
+           
             structured_findings = self._structure_findings(summary_dict, analysis_results)
 
             self.log_execution(task, structured_findings)
@@ -72,19 +72,19 @@ class DataAgent(BaseAgent):
 
         analysis = {}
 
-        # Campaign performance
+       
         if 'campaign_performance' in requirements or not requirements:
             analysis['campaign_performance'] = self._analyze_campaign_performance()
 
-        # Creative type performance
+        
         if 'creative_performance' in requirements or not requirements:
             analysis['creative_performance'] = self.data_loader.get_creative_performance()
 
-        # ROAS timeline
+        
         if 'roas_timeline' in requirements or not requirements:
             analysis['roas_timeline'] = self.data_loader.get_roas_timeline()[:10]  # Last 10 entries
 
-        # Low CTR campaigns
+        
         if 'low_ctr_campaigns' in requirements or not requirements:
             low_ctr = self.data_loader.filter_low_ctr(threshold=0.012)
             analysis['low_ctr_count'] = len(low_ctr)
@@ -140,7 +140,6 @@ Return valid JSON only.
             structured = self.think_json(findings_prompt, temperature=0.2)
             return structured
         except Exception:
-            # Return simplified structure if LLM fails
             return {
                 "summary": summary,
                 "key_segments": analysis,

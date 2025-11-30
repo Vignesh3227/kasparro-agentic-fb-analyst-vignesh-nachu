@@ -2,7 +2,7 @@
 
 A multi-agent system that autonomously diagnoses Facebook Ads performance, identifies ROAS fluctuation drivers, and recommends new creative strategies using quantitative analysis and creative messaging insights.
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -52,7 +52,7 @@ A multi-agent system that autonomously diagnoses Facebook Ads performance, ident
                     └────────────────────────────────┘
 ```
 
-## 📊 Data Flow
+##  Data Flow
 
 1. **Planner**: Decomposes user query into 3-4 atomic subtasks
 2. **Data Agent**: Loads dataset, generates summaries by campaign/creative/audience
@@ -61,7 +61,7 @@ A multi-agent system that autonomously diagnoses Facebook Ads performance, ident
 5. **Creative Generator**: Creates new messaging for low-CTR campaigns based on winners
 6. **Report**: Compiles findings into actionable markdown + JSON outputs
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -98,7 +98,7 @@ python run.py "Analyze CTR performance by creative type"
 # config/config.yaml: data.sample_mode = true (uses first 100 rows)
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 kasparro-agentic-fb-analyst-vignesh-nachu/
@@ -174,7 +174,7 @@ thresholds:
   confidence_high: 0.8                 # High confidence threshold
 ```
 
-## 📊 Example Outputs
+##  Example Outputs
 
 ### insights.json
 
@@ -225,7 +225,7 @@ thresholds:
 - Creative recommendations by campaign
 - Execution metadata
 
-## 🧪 Validation & Robustness
+##  Validation & Robustness
 
 ### Hypothesis Validation
 
@@ -250,7 +250,7 @@ Each hypothesis is evaluated using:
 - Configurable retry attempts with exponential backoff
 - Structured error logging for debugging
 
-## 🏃 Running the System
+##  Running the System
 
 ### Basic Execution
 
@@ -264,27 +264,27 @@ python run.py
 # ║   Multi-Agent System for Ad Performance Diagnosis         ║
 # ╚═══════════════════════════════════════════════════════════╝
 #
-# 📋 Step 1: Planning Analysis...
+#  Step 1: Planning Analysis...
 # ✓ Plan created with 4 subtasks
 # 
-# 📊 Step 2: Loading and Analyzing Data...
+#  Step 2: Loading and Analyzing Data...
 # ✓ Data loaded: 100 records
 # 
-# 💡 Step 3: Generating Hypotheses...
+#  Step 3: Generating Hypotheses...
 # ✓ Generated 4 hypotheses
 # 
-# ✅ Step 4: Validating Hypotheses...
+#  Step 4: Validating Hypotheses...
 # ✓ Validation complete
 # 
-# 🎨 Step 5: Generating Creative Recommendations...
+#  Step 5: Generating Creative Recommendations...
 # ✓ Generated 3 creative recommendations
 # 
-# 📄 Step 6: Compiling Report...
+#  Step 6: Compiling Report...
 # ✓ Saved insights to reports/insights.json
 # ✓ Saved creatives to reports/creatives.json
 # ✓ Saved report to reports/report.md
 # 
-# ✨ Analysis Complete!
+#  Analysis Complete!
 ```
 
 ### Custom Queries
@@ -303,7 +303,7 @@ python run.py "Compare performance across audience types and recommend targeting
 python run.py "Provide complete diagnosis of ad performance and strategic recommendations"
 ```
 
-## 📈 Key Features
+##  Key Features
 
 ### 1. Multi-Agent Reasoning
 
@@ -336,7 +336,7 @@ Each agent has a `.md` prompt file with:
 - Execution history in reports
 - Full debugging trail in logs/
 
-## 🎯 Analysis Framework
+##  Analysis Framework
 
 ### Problem Types Handled
 
@@ -364,7 +364,7 @@ Each agent has a `.md` prompt file with:
    - Lifestyle vs problem-solution angles
    - Social proof vs scarcity elements
 
-## 📝 Prompt Design Philosophy
+##  Prompt Design Philosophy
 
 Prompts follow a three-part structure:
 
@@ -400,7 +400,7 @@ This ensures:
 - Reasoning transparency
 - Reusable prompt templates
 
-## 🔄 Iterative Learning (Optional)
+##  Iterative Learning (Optional)
 
 System can maintain short-term memory of insights across runs:
 
@@ -411,7 +411,7 @@ System can maintain short-term memory of insights across runs:
 # - Track recommendation outcomes
 ```
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### API Key Issues
 
@@ -440,16 +440,16 @@ export GOOGLE_API_KEY="your_key_here"
 # Lower max_tokens if timeouts occur
 ```
 
-## 🚦 Output Validation
+##  Output Validation
 
 All outputs are validated:
 
-- ✅ `insights.json`: Hypothesis structure verified
-- ✅ `creatives.json`: Recommendation format checked
-- ✅ `report.md`: Markdown syntax validated
-- ✅ `logs/`: JSON lines format confirmed
+-  `insights.json`: Hypothesis structure verified
+-  `creatives.json`: Recommendation format checked
+-  `report.md`: Markdown syntax validated
+-  `logs/`: JSON lines format confirmed
 
-## 📚 Dataset Guide
+##  Dataset Guide
 
 See `data/README` for:
 - Column descriptions
@@ -460,7 +460,7 @@ See `data/README` for:
 **Sample Data**: 100 rows of synthetic Facebook Ads data  
 **Full Data Option**: Set `sample_mode: false` in config
 
-## 🎓 Learning Resources
+##  Learning Resources
 
 ### Agentic AI Concepts
 
@@ -479,7 +479,7 @@ This system demonstrates:
 - Message-market fit analysis
 - Statistical validation of hypotheses
 
-## 📊 Execution Timeline
+##  Execution Timeline
 
 Typical analysis runtime: **2-5 minutes**
 
@@ -490,7 +490,7 @@ Typical analysis runtime: **2-5 minutes**
 - Creative Generation: ~90 seconds
 - Report Compilation: ~10 seconds
 
-## 🤝 Contributing
+##  Contributing
 
 To extend the system:
 
@@ -499,11 +499,11 @@ To extend the system:
 3. Register in `AgentOrchestrator.__init__()`
 4. Define execution order in `execute()` method
 
-## 📄 License
+##  License
 
 Project structure follows Kasparro AI Engineer assignment requirements.
 
-## 📞 Support
+##  Support
 
 For issues or questions:
 - Check logs in `logs/` directory

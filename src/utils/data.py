@@ -69,13 +69,13 @@ class DataLoader:
 
         self.df = pd.read_csv(self.dataset_path)
         
-        # Convert date column to datetime
+        
         self.df['date'] = pd.to_datetime(self.df['date'])
         
-        # Sort by date
+        
         self.df = self.df.sort_values('date').reset_index(drop=True)
         
-        # Apply sample if requested
+        
         if self.sample_mode:
             self.df = self.df.head(self.sample_size)
         

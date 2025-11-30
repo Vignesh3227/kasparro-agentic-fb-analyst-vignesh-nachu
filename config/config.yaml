@@ -46,8 +46,8 @@ agents:
 
 # Thresholds and Metrics
 thresholds:
-  roas_drop_threshold: 0.2  # 20% drop considered significant
-  ctr_low_threshold: 0.012  # CTR below 1.2%
+  roas_drop_threshold: 0.2  
+  ctr_low_threshold: 0.012  
   confidence_high: 0.8
   confidence_medium: 0.6
   confidence_low: 0.4

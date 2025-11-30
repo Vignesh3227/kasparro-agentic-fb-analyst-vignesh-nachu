@@ -1,7 +1,6 @@
 """
 Base agent class and LLM client wrapper for the Agentic Facebook Analyst.
 """
-
 import os
 import json
 from typing import Dict, Any, Optional, List
@@ -53,10 +52,8 @@ class LLMClient:
         
         # Extract JSON from response
         try:
-            # Try direct JSON parsing
             return json.loads(response)
         except json.JSONDecodeError:
-            # Try to extract JSON from markdown code blocks
             if "```json" in response:
                 json_str = response.split("```json")[1].split("```")[0].strip()
                 return json.loads(json_str)
